@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Specialties — MEDIQ Medical Billing</title>
+
+<!-- Tailwind CSS (CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0E1C2B',
+          navy: '#0F2C4C',
+          navydeep: '#0A2038',
+          teal: '#0E7C86',
+          tealsoft: '#E4F2F1',
+          coral: '#FF6B4A',
+          coralsoft: '#FFE7E0',
+          sand: '#F7F5F1',
+        },
+        fontFamily: {
+          display: ['"Fraunces"', 'serif'],
+          body: ['"Inter"', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background:#F7F5F1; color:#0E1C2B; }
+  .font-display { font-family: 'Fraunces', serif; }
+  .eyebrow { letter-spacing: .14em; text-transform: uppercase; font-weight:600; font-size:.72rem; }
+
+  .reveal { opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity:1; transform: translateY(0); }
+
+  .clip-diagonal{ clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%); }
+
+  ::-webkit-scrollbar { width:10px; }
+  ::-webkit-scrollbar-thumb { background:#CBD5C0; border-radius:8px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity:1 !important; transform:none !important; transition:none !important; }
+    html { scroll-behavior:auto; }
+  }
+  .focus-ring:focus-visible { outline: 3px solid #FF6B4A; outline-offset: 3px; }
+
+  .specialty-card { transition: all 0.3s ease; }
+  .specialty-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+</style>
+</head>
+
+<body class="antialiased">
+
+<!-- ============ NAV ============ -->
+<header id="site-header" class="sticky top-0 bg-navy/0 inset-x-0 z-50 transition-colors duration-300">
+  <div class="bg-navy backdrop-blur-0" id="nav-bg">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center gap-2 focus-ring">
+          <div class="flex items-center gap-3 font-sans">
+            <div class="w-10 h-10 flex items-center justify-center shrink-0">
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                <path d="M10 75V35C10 30 15 25 20 25H35L50 50L65 25H80C85 25 90 30 90 35V75" stroke="url(#customGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M30 25V55C30 70 45 75 55 60" stroke="#0E1C2B" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="55" cy="65" r="7" fill="#0E7C86" stroke="#ffffff" stroke-width="3"/>
+                <circle cx="28" cy="22" r="4" fill="#0E1C2B"/>
+                <circle cx="72" cy="22" r="4" fill="#0E1C2B"/>
+                <defs>
+                  <linearGradient id="customGrad" x1="10" y1="25" x2="90" y2="75" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#0F2C4C"/>
+                    <stop offset="1" stop-color="#0E7C86"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="flex flex-col">
+              <div class="text-2xl font-extrabold text-white tracking-wider leading-none">
+                MEDI<span class="text-coral">Q</span>
+              </div>
+              <div class="text-[9px] font-bold text-teal tracking-[0.2em] mt-1">
+                MEDICAL BILLING
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-white/90">
+          <a href="index.html#top" class="hover:text-coral transition-colors">Home</a>
+          <a href="about.html" class="hover:text-coral transition-colors">About Us</a>
+          <a href="specialities.html" class="text-coral">Specialities</a>
+          <a href="services.html" class="hover:text-coral transition-colors">Services</a>
+          <a href="blogs.html" class="hover:text-coral transition-colors">Blogs</a>
+          <a href="contact.html" class="hover:text-coral transition-colors">Contact Us</a>
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-5">
+          <a href="tel:+18005551234" class="flex items-center gap-2 text-sm text-white/90 hover:text-white">
+            <i data-lucide="phone-call" class="w-4 h-4 text-coral"></i>
+            <span>(800) 555-1234</span>
+          </a>
+          <a href="contact.html" class="bg-coral hover:bg-coral/90 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors focus-ring">
+            Get a Free Audit
+          </a>
+        </div>
+
+        <button id="menu-btn" class="lg:hidden text-white focus-ring" aria-label="Open menu" aria-expanded="false">
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="lg:hidden hidden bg-navydeep border-t border-white/10">
+    <nav class="flex flex-col px-5 py-4 gap-1 text-white/90 text-sm font-medium">
+      <a href="index.html#top" class="py-3 border-b border-white/10 hover:text-coral transition-colors">Home</a>
+      <a href="about.html" class="py-3 border-b border-white/10 hover:text-coral transition-colors">About Us</a>
+      <a href="specialities.html" class="py-3 border-b border-white/10 text-coral">Specialities</a>
+      <a href="services.html" class="py-3 border-b border-white/10 hover:text-coral transition-colors">Services</a>
+      <a href="blogs.html" class="py-3 border-b border-white/10 hover:text-coral transition-colors">Blogs</a>
+      <a href="contact.html" class="py-3 border-b border-white/10 hover:text-coral transition-colors">Contact Us</a>
+      <a href="contact.html" class="mt-4 bg-coral hover:bg-coral/90 text-white text-center font-semibold px-5 py-3 rounded-full transition-colors">
+        Get a Free Audit
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ PAGE HERO ============ -->
+<section class="relative bg-navy overflow-hidden clip-diagonal pt-16 pb-28 lg:pt-20 lg:pb-36">
+  <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1600&auto=format&fit=crop" alt="" class="w-full h-full object-cover opacity-25">
+    <div class="absolute inset-0 bg-gradient-to-r from-navydeep via-navy/95 to-navy/60"></div>
+  </div>
+  <div class="relative max-w-7xl mx-auto px-5 lg:px-8">
+    <p class="eyebrow text-coral mb-4 reveal in">Our Specialties</p>
+    <h1 class="font-display text-white text-4xl sm:text-5xl lg:text-[3.2rem] leading-[1.1] font-semibold tracking-tight max-w-3xl reveal in">
+      Expert billing solutions for every medical specialty
+    </h1>
+    <p class="mt-6 text-white/60 max-w-lg reveal in">We've perfected billing workflows for 30+ medical specialties with specialized knowledge of unique coding, payer rules, and revenue cycles.</p>
+    <div class="mt-8 flex items-center gap-2 text-sm text-white/50 reveal in">
+      <a href="index.html" class="hover:text-coral transition-colors">Home</a>
+      <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <span class="text-white">Specialties</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO SECTION ============ -->
+<section class="bg-white py-24 lg:py-32 -mt-1">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="reveal">
+        <p class="eyebrow text-teal mb-4">Why Specialty Expertise Matters</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight">
+          Every specialty bills differently. We understand yours.
+        </h2>
+        <p class="mt-5 text-ink/60 leading-relaxed">
+          Behavioral health doesn't code like orthopedics. Urgent care doesn't negotiate like neurosurgery. We've built specialty-specific workflows that capture every dollar your practice is entitled to.
+        </p>
+        <ul class="mt-8 space-y-4">
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 shrink-0 rounded-full bg-tealsoft flex items-center justify-center mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-teal"></i></span>
+            <span class="text-ink/70">Specialty-specific coding audits and compliance reviews</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 shrink-0 rounded-full bg-tealsoft flex items-center justify-center mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-teal"></i></span>
+            <span class="text-ink/70">Custom payer negotiation strategies for your field</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 shrink-0 rounded-full bg-tealsoft flex items-center justify-center mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-teal"></i></span>
+            <span class="text-ink/70">Dedicated coders with years in your specialty</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="reveal relative">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop" alt="Medical professional" class="rounded-3xl w-full h-[400px] object-cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPECIALTIES GRID ============ -->
+<section id="specialties" class="bg-navydeep py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="max-w-2xl mx-auto text-center reveal mb-16">
+      <p class="eyebrow text-coral mb-4">Our Expertise</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-white leading-tight">
+        Comprehensive coverage across medical specialties
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Specialty Card 1 -->
+      <div class="specialty-card reveal group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-coral/40 p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg bg-coral/20 flex items-center justify-center">
+            <i data-lucide="brain" class="w-6 h-6 text-coral"></i>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white">Behavioral Health</h3>
+        </div>
+        <p class="text-sm text-white/60 leading-relaxed mb-4">Specialized coding for psychiatry, psychology, counseling, and substance abuse treatment with modifier expertise.</p>
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- Specialty Card 2 -->
+      <div class="specialty-card reveal group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-coral/40 p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg bg-coral/20 flex items-center justify-center">
+            <i data-lucide="heart" class="w-6 h-6 text-coral"></i>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white">Cardiology</h3>
+        </div>
+        <p class="text-sm text-white/60 leading-relaxed mb-4">Complex cardiac procedures, device management, and preventive cardiology billing with payer-specific rules.</p>
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- Specialty Card 3 -->
+      <div class="specialty-card reveal group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-coral/40 p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg bg-coral/20 flex items-center justify-center">
+            <i data-lucide="bone" class="w-6 h-6 text-coral"></i>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white">Orthopedics</h3>
+        </div>
+        <p class="text-sm text-white/60 leading-relaxed mb-4">Surgical and non-surgical orthopedic billing including sports medicine, spine surgery, and joint replacement.</p>
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- Specialty Card 4 -->
+      <div class="specialty-card reveal group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-coral/40 p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg bg-coral/20 flex items-center justify-center">
+            <i data-lucide="eye" class="w-6 h-6 text-coral"></i>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white">Ophthalmology</h3>
+        </div>
+        <p class="text-sm text-white/60 leading-relaxed mb-4">Laser procedures, surgical corrections, and complex refractive surgery billing with specialty modifiers.</p>
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- Specialty Card 5 -->
+      <div class="specialty-card reveal group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-coral/40 p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg bg-coral/20 flex items-center justify-center">
+            <i data-lucide="stethoscope" class="w-6 h-6 text-coral"></i>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white">Primary Care</h3>
+        </div>
+        <p class="text-sm text-white/60 leading-relaxed mb-4">Internal medicine and family practice billing optimized for preventive care, chronic disease, and high-volume encounters.</p>
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- Specialty Card 6 -->
+      <div class="specialty-card reveal group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-coral/40 p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg bg-coral/20 flex items-center justify-center">
+            <i data-lucide="zap" class="w-6 h-6 text-coral"></i>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white">Emergency Medicine</h3>
+        </div>
+        <p class="text-sm text-white/60 leading-relaxed mb-4">High-acuity trauma and emergency billing with rapid coding turnaround and severity modifiers.</p>
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- Specialty Card 7 -->
+      <div class="specialty-card reveal group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-coral/40 p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg bg-coral/20 flex items-center justify-center">
+            <i data-lucide="activity" class="w-6 h-6 text-coral"></i>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white">Physical Therapy</h3>
+        </div>
+        <p class="text-sm text-white/60 leading-relaxed mb-4">PT/OT billing with state regulations, modality coding, and pre-authorization management.</p>
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- Specialty Card 8 -->
+      <div class="specialty-card reveal group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-coral/40 p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg bg-coral/20 flex items-center justify-center">
+            <i data-lucide="smile" class="w-6 h-6 text-coral"></i>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white">Dental</h3>
+        </div>
+        <p class="text-sm text-white/60 leading-relaxed mb-4">Dental procedure coding, insurance claim optimization, and managed care billing workflows.</p>
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- Specialty Card 9 -->
+      <div class="specialty-card reveal group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-coral/40 p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg bg-coral/20 flex items-center justify-center">
+            <i data-lucide="cross" class="w-6 h-6 text-coral"></i>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white">Urgent Care</h3>
+        </div>
+        <p class="text-sm text-white/60 leading-relaxed mb-4">High-volume urgent care billing optimized for quick turnaround and walk-in patient processing.</p>
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPECIALTY BENEFITS ============ -->
+<section class="bg-white py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="reveal">
+        <p class="eyebrow text-teal mb-4">Specialty-Specific Benefits</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight">
+          What makes our specialty expertise different
+        </h2>
+        <p class="mt-5 text-ink/60 leading-relaxed">
+          We don't treat all practices the same. Our teams are organized by specialty, meaning your coders, billing experts, and account managers all understand the unique challenges of your field.
+        </p>
+
+        <div class="mt-10 space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 shrink-0 rounded-xl bg-coral/10 flex items-center justify-center">
+              <i data-lucide="target" class="w-6 h-6 text-coral"></i>
+            </div>
+            <div>
+              <p class="font-semibold text-ink mb-1">Specialty-Specific Denial Analysis</p>
+              <p class="text-sm text-ink/60">We know which denials are common in your specialty and fight them proactively.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 shrink-0 rounded-xl bg-coral/10 flex items-center justify-center">
+              <i data-lucide="award" class="w-6 h-6 text-coral"></i>
+            </div>
+            <div>
+              <p class="font-semibold text-ink mb-1">Certified Coders by Specialty</p>
+              <p class="text-sm text-ink/60">Our team includes CPC, CAC, and specialty-certified coders with deep field experience.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 shrink-0 rounded-xl bg-coral/10 flex items-center justify-center">
+              <i data-lucide="trending-up" class="w-6 h-6 text-coral"></i>
+            </div>
+            <div>
+              <p class="font-semibold text-ink mb-1">Benchmark Performance Metrics</p>
+              <p class="text-sm text-ink/60">Compare your clean claim rate, AR aging, and reimbursement to specialty benchmarks.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 shrink-0 rounded-xl bg-coral/10 flex items-center justify-center">
+              <i data-lucide="shield-check" class="w-6 h-6 text-coral"></i>
+            </div>
+            <div>
+              <p class="font-semibold text-ink mb-1">Compliance & Regulatory Expertise</p>
+              <p class="text-sm text-ink/60">Stay ahead of specialty-specific regulations, coding updates, and payer rule changes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal relative">
+        <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?q=80&w=1000&auto=format&fit=crop" alt="Team collaboration" class="rounded-3xl w-full h-[420px] object-cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BANNER ============ -->
+<section class="relative bg-navy overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2">
+    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=900&auto=format&fit=crop" alt="" class="hidden lg:block w-full h-full object-cover">
+    <div class="reveal py-16 lg:py-20 lg:pl-14">
+      <p class="eyebrow text-coral mb-4">Ready to Optimize?</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-white leading-tight">
+        Get a specialty-focused claims audit
+      </h2>
+      <p class="mt-4 text-white/60 max-w-md">Let's review your last 50 claims and show you exactly where specialty-specific expertise can improve your bottom line.</p>
+      <a href="contact.html" class="mt-7 inline-flex items-center gap-2 bg-coral hover:bg-coral/90 text-white font-semibold px-7 py-3.5 rounded-full transition-colors focus-ring">
+        Get Free Audit <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="bg-white py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center reveal mb-16">
+      <p class="eyebrow text-teal mb-4">Client Experiences</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight">
+        See the impact of specialty expertise
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <div class="reveal rounded-2xl bg-sand p-8 border border-ink/5">
+        <div class="flex gap-1 text-coral mb-4">
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+        </div>
+        <p class="text-ink/70 text-sm leading-relaxed mb-4">"They finally understood our orthopedic billing. Denials dropped 34% in the first quarter."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-coral/20 flex items-center justify-center">
+            <span class="font-bold text-coral">JD</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-ink">James Davis</p>
+            <p class="text-xs text-ink/50">Orthopedic Surgeon</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal rounded-2xl bg-sand p-8 border border-ink/5">
+        <div class="flex gap-1 text-coral mb-4">
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+        </div>
+        <p class="text-ink/70 text-sm leading-relaxed mb-4">"For behavioral health, they know it all. Modifier application is perfect every time."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-coral/20 flex items-center justify-center">
+            <span class="font-bold text-coral">SM</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-ink">Dr. Sarah Martinez</p>
+            <p class="text-xs text-ink/50">Psychiatric Clinic</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal rounded-2xl bg-sand p-8 border border-ink/5">
+        <div class="flex gap-1 text-coral mb-4">
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+        </div>
+        <p class="text-ink/70 text-sm leading-relaxed mb-4">"They brought our clean claim rate from 88% to 96% in 6 months. Best move we made."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-coral/20 flex items-center justify-center">
+            <span class="font-bold text-coral">RC</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-ink">Robin Chen</p>
+            <p class="text-xs text-ink/50">Cardiology Group</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="relative bg-navy overflow-hidden py-24">
+  <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1600&auto=format&fit=crop" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20">
+  <div class="absolute inset-0 bg-navydeep/80"></div>
+  <div class="relative max-w-3xl mx-auto px-5 text-center reveal">
+    <h2 class="font-display text-3xl sm:text-4xl font-semibold text-white leading-tight">
+      Your specialty deserves specialized support
+    </h2>
+    <p class="mt-4 text-white/60 max-w-lg mx-auto">Find out how specialty-focused billing expertise can improve your clean claim rate and bottom line.</p>
+    <div class="mt-8">
+      <a href="contact.html" class="inline-flex items-center gap-2 bg-coral hover:bg-coral/90 text-white font-semibold px-8 py-4 rounded-full transition-colors focus-ring">
+        Talk to Our Team <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-navydeep pt-20 pb-8">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
+      <div class="lg:col-span-2">
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="w-9 h-9 rounded-lg bg-coral flex items-center justify-center">
+            <i data-lucide="activity" class="w-5 h-5 text-white"></i>
+          </span>
+          <span class="font-display text-xl font-semibold text-white">Vantage <span class="text-coral">RCM</span></span>
+        </a>
+        <p class="mt-5 text-white/50 text-sm leading-relaxed max-w-xs">Billing, credentialing, virtual staffing, and digital growth for independent healthcare practices.</p>
+        <div class="flex items-center gap-3 mt-6">
+          <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral transition-colors" aria-label="Facebook">
+            <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral transition-colors" aria-label="LinkedIn">
+            <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral transition-colors" aria-label="Twitter">
+            <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral transition-colors" aria-label="Instagram">
+            <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-white font-semibold text-sm mb-5">Services</p>
+        <ul class="space-y-3 text-sm text-white/50">
+          <li><a href="services.html" class="hover:text-coral transition-colors">Billing & Coding</a></li>
+          <li><a href="services.html" class="hover:text-coral transition-colors">Credentialing</a></li>
+          <li><a href="services.html" class="hover:text-coral transition-colors">Virtual Assistant</a></li>
+          <li><a href="services.html" class="hover:text-coral transition-colors">Virtual Medical Scribe</a></li>
+          <li><a href="services.html" class="hover:text-coral transition-colors">Website Development</a></li>
+          <li><a href="services.html" class="hover:text-coral transition-colors">SEO Marketing</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-white font-semibold text-sm mb-5">Company</p>
+        <ul class="space-y-3 text-sm text-white/50">
+          <li><a href="about.html" class="hover:text-coral transition-colors">About Us</a></li>
+          <li><a href="services.html" class="hover:text-coral transition-colors">Pricing</a></li>
+          <li><a href="blogs.html" class="hover:text-coral transition-colors">Insights</a></li>
+          <li><a href="specialities.html" class="hover:text-coral transition-colors">Specialties</a></li>
+          <li><a href="contact.html" class="hover:text-coral transition-colors">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-white font-semibold text-sm mb-5">Contact</p>
+        <ul class="space-y-3 text-sm text-white/50">
+          <li class="flex items-start gap-2"><i data-lucide="map-pin" class="w-4 h-4 mt-0.5 text-coral shrink-0"></i>500 Market St, Suite 210, Austin, TX</li>
+          <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-coral shrink-0"></i>(800) 555-1234</li>
+          <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-coral shrink-0"></i>hello@vantagercm.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-white/40 text-xs">© 2026 Vantage RCM. All rights reserved.</p>
+      <div class="flex gap-6 text-xs text-white/40">
+        <a href="#" class="hover:text-coral transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-coral transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-coral transition-colors">HIPAA Notice</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ SCRIPTS ============ -->
+<script>
+  lucide.createIcons();
+
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = !mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(!isOpen));
+    menuBtn.innerHTML = isOpen ? '<i data-lucide="menu" class="w-7 h-7"></i>' : '<i data-lucide="x" class="w-7 h-7"></i>';
+    lucide.createIcons();
+  });
+  document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    menuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+    lucide.createIcons();
+  }));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vantage RCM — Medical Billing, Credentialing &amp; Virtual Staffing for Practices</title>
+
+<!-- Tailwind CSS (CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0E1C2B',
+          navy: '#0F2C4C',
+          navydeep: '#0A2038',
+          teal: '#0E7C86',
+          tealsoft: '#E4F2F1',
+          coral: '#FF6B4A',
+          coralsoft: '#FFE7E0',
+          sand: '#F7F5F1',
+        },
+        fontFamily: {
+          display: ['"Fraunces"', 'serif'],
+          body: ['"Inter"', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background:#F7F5F1; color:#0E1C2B; }
+  .font-display { font-family: 'Fraunces', serif; }
+  .eyebrow { letter-spacing: .14em; text-transform: uppercase; font-weight:600; font-size:.72rem; }
+
+  /* Pipeline signature element */
+  .pipe-track { position: relative; }
+  .pipe-track::before {
+    content:'';
+    position:absolute; left:0; right:0; top:22px;
+    height:2px;
+    background: repeating-linear-gradient(90deg, #C9D3DB 0 10px, transparent 10px 18px);
+  }
+  @media (max-width: 767px){
+    .pipe-track::before{ display:none; }
+  }
+
+  .reveal { opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity:1; transform: translateY(0); }
+
+  .accordion-panel { max-height:0; overflow:hidden; transition: max-height .35s ease; }
+
+  ::-webkit-scrollbar { width:10px; }
+  ::-webkit-scrollbar-thumb { background:#CBD5C0; border-radius:8px; }
+
+  .clip-note { clip-path: polygon(0 0, 100% 0, 100% 92%, 92% 100%, 0 100%); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity:1 !important; transform:none !important; transition:none !important; }
+    html { scroll-behavior:auto; }
+  }
+
+  .focus-ring:focus-visible { outline: 3px solid #FF6B4A; outline-offset: 3px; }
+</style>
+</head>
+
+<body class="antialiased">
+
+<!-- ============ NAV ============ -->
+<header id="site-header" class="fixed top-0 bg-navy/0 inset-x-0 z-50 transition-colors duration-300">
+  <div class="bg-#0A2038 backdrop-blur-0" id="nav-bg">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="#top" class="flex items-center gap-2 focus-ring">
+<div class="flex items-center gap-3 font-sans">
+  
+  <!-- Smaller Logo SVG Icon -->
+  <div class="w-10 h-10 flex items-center justify-center shrink-0">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+      <!-- Background M Shape Ribbon using brand teal/navy -->
+      <path d="M10 75V35C10 30 15 25 20 25H35L50 50L65 25H80C85 25 90 30 90 35V75" stroke="url(#customGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Stethoscope Wire & Head -->
+      <path d="M30 25V55C30 70 45 75 55 60" stroke="#0E1C2B" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="55" cy="65" r="7" fill="#0E7C86" stroke="#ffffff" stroke-width="3"/>
+      <circle cx="28" cy="22" r="4" fill="#0E1C2B"/>
+      <circle cx="72" cy="22" r="4" fill="#0E1C2B"/>
+      <!-- Gradient Definition using brand colors -->
+      <defs>
+        <linearGradient id="customGrad" x1="10" y1="25" x2="90" y2="75" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#0F2C4C"/>
+          <stop offset="1" stop-color="#0E7C86"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Logo Text & Taglines -->
+  <div class="flex flex-col">
+    <!-- Brand Name (Using 'ink' color and 'coral' highlight for Q) -->
+    <div class="text-2xl font-extrabold text-[var(--ink,#0E1C2B)] tracking-wider leading-none">
+      MEDI<span class="text-[var(--coral,#FF6B4A)]">Q</span>
+    </div>
+    
+    <!-- Medical Billing Tagline (Using 'teal' color) -->
+    <div class="text-[9px] font-bold text-[var(--teal,#0E7C86)] tracking-[0.2em] mt-1">
+      MEDICAL BILLING
+    </div>
+    
+   
+  </div>
+
+</div>       </a>
+
+       <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-white/90">
+    <a href="#home" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Home</a>
+    <a href="about.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">About Us</a>
+    <a href="specialities.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Specialities</a>
+    <a href="services.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Services</a>
+    <a href="blogs.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Blogs</a>
+    <a href="contact.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Contact Us</a>
+  </nav>
+
+  <!-- Right Actions (Phone & CTA) -->
+  <div class="hidden lg:flex items-center gap-5">
+    <a href="tel:+18005551234" class="flex items-center gap-2 text-sm text-white/90 hover:text-white">
+      <i data-lucide="phone-call" class="w-4 h-4 text-[var(--coral,#FF6B4A)]"></i>
+      <span>(800) 555-1234</span>
+    </a>
+    <a href="contact.html" class="bg-[var(--coral,#FF6B4A)] hover:bg-[var(--coral,#FF6B4A)]/90 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
+      Get a Free Audit
+    </a>
+  </div>
+
+  <!-- Mobile Menu Button -->
+  <button id="menu-btn" class="lg:hidden text-white focus:outline-none" aria-label="Open menu" aria-expanded="false">
+    <i data-lucide="menu" class="w-7 h-7"></i>
+  </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile menu -->
+ <div id="mobile-menu" class="lg:hidden hidden bg-[var(--navydeep,#0A2038)] border-t border-white/10">
+  <nav class="flex flex-col px-5 py-4 gap-1 text-white/90 text-sm font-medium">
+    <a href="#home" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Home</a>
+    <a href="about.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">About Us</a>
+    <a href="specialities.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Specialities</a>
+    <a href="services.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Services</a>
+    <a href="blogs.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Blogs</a>
+    <a href="contact.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Contact Us</a>
+    
+    <a href="contact.html" class="mt-4 bg-[var(--coral,#FF6B4A)] hover:bg-[var(--coral,#FF6B4A)]/90 text-white text-center font-semibold px-5 py-3 rounded-full transition-colors">
+      Get a Free Audit
+    </a>
+  </nav>
+</div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="relative bg-navy overflow-hidden pt-36 pb-28 lg:pt-44 lg:pb-32">
+  <div class="absolute inset-0 opacity-[0.07]" style="background-image:radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 28px 28px;"></div>
+  <div class="absolute -right-40 top-10 w-[520px] h-[520px] rounded-full bg-teal/20 blur-3xl"></div>
+  <div class="absolute -left-32 bottom-0 w-[420px] h-[420px] rounded-full bg-coral/10 blur-3xl"></div>
+
+  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-14 items-center">
+    <div class="reveal in">
+      <p class="eyebrow text-coral mb-5">Revenue Cycle &amp; Practice Growth Partner</p>
+      <h1 class="font-display text-white text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] font-semibold tracking-tight">
+        Fewer denied claims.<br>
+        More time with patients.
+      </h1>
+      <p class="mt-6 text-white/70 text-lg max-w-xl leading-relaxed">
+        Vantage RCM handles the billing, credentialing, staffing, and digital work behind your practice — so your team can focus on care, not paperwork.
+      </p>
+      <div class="mt-9 flex flex-wrap items-center gap-4">
+        <a href="#contact" class="bg-coral hover:bg-coral/90 text-white font-semibold px-7 py-3.5 rounded-full transition-colors focus-ring">
+          Get a Free Billing Audit
+        </a>
+        <a href="#process" class="flex items-center gap-3 text-white font-medium focus-ring">
+          <span class="w-11 h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+          </span>
+          See how it works
+        </a>
+      </div>
+
+      <div class="mt-14 grid grid-cols-3 gap-6 max-w-lg">
+        <div>
+          <p class="font-display text-3xl text-white font-semibold">98.4<span class="text-coral">%</span></p>
+          <p class="text-white/60 text-xs mt-1 leading-snug">Clean claim<br>submission rate</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl text-white font-semibold">24–48<span class="text-coral">hr</span></p>
+          <p class="text-white/60 text-xs mt-1 leading-snug">Average claim<br>turnaround</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl text-white font-semibold">340<span class="text-coral">+</span></p>
+          <p class="text-white/60 text-xs mt-1 leading-snug">Practices<br>supported</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal in relative">
+      <div class="rounded-[28px] overflow-hidden border border-white/10 shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1200&auto=format&fit=crop" alt="Medical billing specialist reviewing claims on a laptop" class="w-full h-[420px] object-cover" />
+      </div>
+      <div class="absolute -bottom-8 -left-8 bg-white rounded-2xl shadow-xl p-5 w-60 hidden sm:block">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-tealsoft flex items-center justify-center">
+            <i data-lucide="shield-check" class="w-5 h-5 text-teal"></i>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-ink">HIPAA-Compliant</p>
+            <p class="text-xs text-ink/50">Certified staff &amp; systems</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<section class="bg-white border-b border-black/5">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-ink/40 text-xs font-semibold tracking-wide uppercase">
+    <span>Independent Practices</span>
+    <span class="w-1 h-1 rounded-full bg-ink/20"></span>
+    <span>Multi-Specialty Groups</span>
+    <span class="w-1 h-1 rounded-full bg-ink/20"></span>
+    <span>Telehealth Clinics</span>
+    <span class="w-1 h-1 rounded-full bg-ink/20"></span>
+    <span>Behavioral Health</span>
+    <span class="w-1 h-1 rounded-full bg-ink/20"></span>
+    <span>Urgent Care Centers</span>
+  </div>
+</section>
+
+<!-- ============ ABOUT / TABS ============ -->
+<section class="bg-sand py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="reveal order-2 lg:order-1 relative">
+      <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1000&auto=format&fit=crop" alt="Virtual assistant team supporting a medical practice" class="rounded-3xl w-full h-[440px] object-cover" />
+      <div class="absolute -top-6 -right-6 bg-navy text-white rounded-2xl p-5 w-48 shadow-xl hidden sm:block">
+        <p class="font-display text-2xl font-semibold">7+ Yrs</p>
+        <p class="text-white/60 text-xs mt-1">Serving U.S. healthcare practices</p>
+      </div>
+    </div>
+
+    <div class="reveal order-1 lg:order-2">
+      <p class="eyebrow text-teal mb-4">About Vantage RCM</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight">
+        One team behind your billing, staffing, and online presence
+      </h2>
+      <p class="mt-5 text-ink/60 leading-relaxed">
+        We started as a two-person billing desk for a family clinic. Today we run coding, credentialing, virtual staffing, and marketing for hundreds of practices — built on the same principle: your admin work should never slow down patient care.
+      </p>
+
+      <!-- Tabs -->
+      <div class="mt-9">
+        <div class="flex gap-2 border-b border-ink/10" role="tablist">
+          <button class="tab-btn active px-1 pb-3 mr-6 text-sm font-semibold text-navy border-b-2 border-coral" data-tab="accuracy">Accuracy</button>
+          <button class="tab-btn px-1 pb-3 mr-6 text-sm font-semibold text-ink/40 border-b-2 border-transparent" data-tab="speed">Speed</button>
+          <button class="tab-btn px-1 pb-3 text-sm font-semibold text-ink/40 border-b-2 border-transparent" data-tab="compliance">Compliance</button>
+        </div>
+        <div class="mt-5">
+          <div class="tab-panel" data-panel="accuracy">
+            <p class="text-ink/60 leading-relaxed">Certified coders double-check every claim against payer rules before it ever leaves our desk, cutting denials at the source instead of chasing them afterward.</p>
+          </div>
+          <div class="tab-panel hidden" data-panel="speed">
+            <p class="text-ink/60 leading-relaxed">Claims move through intake, coding, and submission on a same-week cycle, so your cash flow doesn't wait on a backlog.</p>
+          </div>
+          <div class="tab-panel hidden" data-panel="compliance">
+            <p class="text-ink/60 leading-relaxed">Every process is built around HIPAA and payer-specific requirements, with audit trails your practice can hand over any time it's asked.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="bg-white py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="max-w-2xl mx-auto text-center reveal">
+      <p class="eyebrow text-coral mb-4">Client Services</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight">
+        Everything your practice needs to run smoother
+      </h2>
+      <p class="mt-4 text-ink/60">Six services, one point of contact — pick what your practice needs, or hand us the whole back office.</p>
+    </div>
+
+    <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- 1 -->
+      <div class="reveal group rounded-3xl border border-ink/10 p-8 hover:border-coral/40 hover:shadow-xl transition-all bg-sand/40">
+        <div class="flex items-center justify-between mb-6">
+          <span class="w-12 h-12 rounded-xl bg-navy flex items-center justify-center">
+            <i data-lucide="receipt-text" class="w-5 h-5 text-white"></i>
+          </span>
+          <span class="font-display text-xs text-ink/30">01</span>
+        </div>
+        <h3 class="font-display text-lg font-semibold text-ink">Billing &amp; Coding Services</h3>
+        <p class="mt-3 text-sm text-ink/60 leading-relaxed">Accurate CPT/ICD-10 coding, claim scrubbing, and submission that keeps denials low and payments on schedule.</p>
+        <a href="#contact" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- 2 -->
+      <div class="reveal group rounded-3xl border border-ink/10 p-8 hover:border-coral/40 hover:shadow-xl transition-all bg-sand/40">
+        <div class="flex items-center justify-between mb-6">
+          <span class="w-12 h-12 rounded-xl bg-navy flex items-center justify-center">
+            <i data-lucide="badge-check" class="w-5 h-5 text-white"></i>
+          </span>
+          <span class="font-display text-xs text-ink/30">02</span>
+        </div>
+        <h3 class="font-display text-lg font-semibold text-ink">Credentialing Services</h3>
+        <p class="mt-3 text-sm text-ink/60 leading-relaxed">Payer enrollment, re-credentialing, and CAQH upkeep managed end-to-end so providers stay in-network without gaps.</p>
+        <a href="#contact" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- 3 -->
+      <div class="reveal group rounded-3xl border border-ink/10 p-8 hover:border-coral/40 hover:shadow-xl transition-all bg-sand/40">
+        <div class="flex items-center justify-between mb-6">
+          <span class="w-12 h-12 rounded-xl bg-navy flex items-center justify-center">
+            <i data-lucide="headset" class="w-5 h-5 text-white"></i>
+          </span>
+          <span class="font-display text-xs text-ink/30">03</span>
+        </div>
+        <h3 class="font-display text-lg font-semibold text-ink">Virtual Assistant Services</h3>
+        <p class="mt-3 text-sm text-ink/60 leading-relaxed">Trained virtual staff for scheduling, patient calls, inbox management, and front-desk overflow — on your hours.</p>
+        <a href="#contact" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- 4 -->
+      <div class="reveal group rounded-3xl border border-ink/10 p-8 hover:border-coral/40 hover:shadow-xl transition-all bg-sand/40">
+        <div class="flex items-center justify-between mb-6">
+          <span class="w-12 h-12 rounded-xl bg-navy flex items-center justify-center">
+            <i data-lucide="clipboard-pen-line" class="w-5 h-5 text-white"></i>
+          </span>
+          <span class="font-display text-xs text-ink/30">04</span>
+        </div>
+        <h3 class="font-display text-lg font-semibold text-ink">Virtual Medical Scribe Services</h3>
+        <p class="mt-3 text-sm text-ink/60 leading-relaxed">Real-time charting during visits, so providers leave the exam room with notes already done, not deferred to evenings.</p>
+        <a href="#contact" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- 5 -->
+      <div class="reveal group rounded-3xl border border-ink/10 p-8 hover:border-coral/40 hover:shadow-xl transition-all bg-sand/40">
+        <div class="flex items-center justify-between mb-6">
+          <span class="w-12 h-12 rounded-xl bg-navy flex items-center justify-center">
+            <i data-lucide="layout-template" class="w-5 h-5 text-white"></i>
+          </span>
+          <span class="font-display text-xs text-ink/30">05</span>
+        </div>
+        <h3 class="font-display text-lg font-semibold text-ink">Website Development Services</h3>
+        <p class="mt-3 text-sm text-ink/60 leading-relaxed">Fast, accessible practice websites with online booking and intake forms built in — no template feel.</p>
+        <a href="#contact" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- 6 -->
+      <div class="reveal group rounded-3xl border border-ink/10 p-8 hover:border-coral/40 hover:shadow-xl transition-all bg-sand/40">
+        <div class="flex items-center justify-between mb-6">
+          <span class="w-12 h-12 rounded-xl bg-navy flex items-center justify-center">
+            <i data-lucide="trending-up" class="w-5 h-5 text-white"></i>
+          </span>
+          <span class="font-display text-xs text-ink/30">06</span>
+        </div>
+        <h3 class="font-display text-lg font-semibold text-ink">SEO Marketing</h3>
+        <p class="mt-3 text-sm text-ink/60 leading-relaxed">Local search, listings, and content strategy that gets new patients finding — and booking with — your practice.</p>
+        <a href="#contact" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS / SIGNATURE PIPELINE ============ -->
+<section id="process" class="bg-navydeep py-24 lg:py-32 relative overflow-hidden">
+  <div class="absolute -left-24 top-1/3 w-72 h-72 bg-teal/10 rounded-full blur-3xl"></div>
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 relative">
+    <div class="max-w-2xl reveal">
+      <p class="eyebrow text-coral mb-4">How A Claim Moves</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-white leading-tight">From patient visit to posted payment</h2>
+      <p class="mt-4 text-white/60">Full visibility at every stage — no black box, no guessing where a claim sits.</p>
+    </div>
+
+    <div class="mt-16 pipe-track grid grid-cols-2 md:grid-cols-5 gap-y-10 gap-x-6">
+      <div class="reveal flex flex-col items-start">
+        <span class="w-11 h-11 rounded-full bg-coral text-white font-display font-semibold flex items-center justify-center text-sm">1</span>
+        <p class="mt-4 text-white font-semibold text-sm">Intake</p>
+        <p class="mt-1 text-white/50 text-xs leading-relaxed">Visit notes &amp; charge capture received</p>
+      </div>
+      <div class="reveal flex flex-col items-start">
+        <span class="w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white font-display font-semibold flex items-center justify-center text-sm">2</span>
+        <p class="mt-4 text-white font-semibold text-sm">Coding</p>
+        <p class="mt-1 text-white/50 text-xs leading-relaxed">Certified coders assign CPT/ICD-10</p>
+      </div>
+      <div class="reveal flex flex-col items-start">
+        <span class="w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white font-display font-semibold flex items-center justify-center text-sm">3</span>
+        <p class="mt-4 text-white font-semibold text-sm">Scrubbing</p>
+        <p class="mt-1 text-white/50 text-xs leading-relaxed">Claims checked against payer rules</p>
+      </div>
+      <div class="reveal flex flex-col items-start">
+        <span class="w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white font-display font-semibold flex items-center justify-center text-sm">4</span>
+        <p class="mt-4 text-white font-semibold text-sm">Submission</p>
+        <p class="mt-1 text-white/50 text-xs leading-relaxed">Sent electronically, tracked to payer</p>
+      </div>
+      <div class="reveal flex flex-col items-start">
+        <span class="w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white font-display font-semibold flex items-center justify-center text-sm">5</span>
+        <p class="mt-4 text-white font-semibold text-sm">Posting</p>
+        <p class="mt-1 text-white/50 text-xs leading-relaxed">Payment posted &amp; reported to your team</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY US ============ -->
+<section id="why" class="bg-sand py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="reveal">
+      <p class="eyebrow text-teal mb-4">Why Practices Choose Us</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight">Built for practices that don't have time to chase paperwork</h2>
+      <p class="mt-5 text-ink/60 leading-relaxed">We plug into the tools you already use — no rip-and-replace, no long onboarding. Just a team that already knows how healthcare admin work is supposed to run.</p>
+
+      <div class="mt-9 space-y-6">
+        <div class="flex gap-4">
+          <span class="w-10 h-10 shrink-0 rounded-full bg-coralsoft flex items-center justify-center"><i data-lucide="zap" class="w-5 h-5 text-coral"></i></span>
+          <div>
+            <p class="font-semibold text-ink">Fast onboarding</p>
+            <p class="text-sm text-ink/60 mt-1">Live on your EHR and billing tools within 2 weeks, not months.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="w-10 h-10 shrink-0 rounded-full bg-coralsoft flex items-center justify-center"><i data-lucide="users-round" class="w-5 h-5 text-coral"></i></span>
+          <div>
+            <p class="font-semibold text-ink">Dedicated account team</p>
+            <p class="text-sm text-ink/60 mt-1">One point of contact who knows your practice, not a rotating queue.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="w-10 h-10 shrink-0 rounded-full bg-coralsoft flex items-center justify-center"><i data-lucide="lock-keyhole" class="w-5 h-5 text-coral"></i></span>
+          <div>
+            <p class="font-semibold text-ink">HIPAA-first systems</p>
+            <p class="text-sm text-ink/60 mt-1">Encrypted workflows and access controls built around patient data.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal relative">
+      <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?q=80&w=1000&auto=format&fit=crop" alt="Front desk staff assisting a patient" class="rounded-3xl w-full h-[460px] object-cover" />
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BANNER ============ -->
+<section class="bg-teal relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-16 grid lg:grid-cols-2 gap-8 items-center">
+    <div class="reveal">
+      <p class="eyebrow text-white/70 mb-3">Ready When You Are</p>
+      <h2 class="font-display text-2xl sm:text-3xl font-semibold text-white leading-tight">
+        See where your billing is losing revenue — free.
+      </h2>
+      <p class="mt-3 text-white/80 max-w-md">We'll review 90 days of claims and show you exactly where denials and delays are costing you.</p>
+    </div>
+    <div class="reveal flex lg:justify-end">
+      <a href="#contact" class="bg-navy hover:bg-navydeep text-white font-semibold px-8 py-4 rounded-full transition-colors focus-ring">
+        Book My Free Audit
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="bg-white py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-6 reveal">
+      <div>
+        <p class="eyebrow text-coral mb-4">Client Stories</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight max-w-lg">What practices say after switching</h2>
+      </div>
+      <div class="flex gap-3">
+        <button id="t-prev" class="w-11 h-11 rounded-full border border-ink/15 flex items-center justify-center hover:bg-sand focus-ring" aria-label="Previous testimonial"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+        <button id="t-next" class="w-11 h-11 rounded-full border border-ink/15 flex items-center justify-center hover:bg-sand focus-ring" aria-label="Next testimonial"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+      </div>
+    </div>
+
+    <div class="mt-12 overflow-hidden">
+      <div id="t-track" class="flex transition-transform duration-500 ease-out gap-6">
+
+        <div class="min-w-full sm:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] rounded-3xl border border-ink/10 p-8 bg-sand/40">
+          <div class="flex gap-1 text-coral mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-ink/70 leading-relaxed">"Denials dropped within the first month. Our front desk finally isn't fielding billing calls all day."</p>
+          <div class="mt-6 flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=200&auto=format&fit=crop" class="w-11 h-11 rounded-full object-cover" alt="">
+            <div>
+              <p class="text-sm font-semibold text-ink">Dr. Amina Farooq</p>
+              <p class="text-xs text-ink/50">Family Medicine, Lahore Care Clinic</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="min-w-full sm:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] rounded-3xl border border-ink/10 p-8 bg-sand/40">
+          <div class="flex gap-1 text-coral mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-ink/70 leading-relaxed">"Credentialing used to take us months and multiple missed emails. Vantage tracked every payer for us end to end."</p>
+          <div class="mt-6 flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=200&auto=format&fit=crop" class="w-11 h-11 rounded-full object-cover" alt="">
+            <div>
+              <p class="text-sm font-semibold text-ink">Dr. Michael Owens</p>
+              <p class="text-xs text-ink/50">Urgent Care Group</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="min-w-full sm:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] rounded-3xl border border-ink/10 p-8 bg-sand/40">
+          <div class="flex gap-1 text-coral mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-ink/70 leading-relaxed">"The virtual scribe alone gave our providers two extra hours back every day. The new website has doubled our online bookings."</p>
+          <div class="mt-6 flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1607990283143-e81e7a2c9349?q=80&w=200&auto=format&fit=crop" class="w-11 h-11 rounded-full object-cover" alt="">
+            <div>
+              <p class="text-sm font-semibold text-ink">Dr. Sana Iqbal</p>
+              <p class="text-xs text-ink/50">Behavioral Health Practice</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="bg-sand py-24 lg:py-32">
+  <div class="max-w-4xl mx-auto px-5 lg:px-8">
+    <div class="text-center reveal">
+      <p class="eyebrow text-teal mb-4">Common Questions</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight">Frequently asked questions</h2>
+    </div>
+
+    <div class="mt-14 divide-y divide-ink/10 border-t border-b border-ink/10">
+
+      <div class="faq-item">
+        <button class="faq-q w-full flex items-center justify-between py-6 text-left focus-ring">
+          <span class="font-semibold text-ink pr-6">Which specialties do you work with?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-coral shrink-0 transition-transform"></i>
+        </button>
+        <div class="accordion-panel">
+          <p class="pb-6 text-ink/60 leading-relaxed pr-10">We support independent practices, multi-specialty groups, telehealth clinics, behavioral health, and urgent care centers across the U.S.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q w-full flex items-center justify-between py-6 text-left focus-ring">
+          <span class="font-semibold text-ink pr-6">How long does onboarding take?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-coral shrink-0 transition-transform"></i>
+        </button>
+        <div class="accordion-panel">
+          <p class="pb-6 text-ink/60 leading-relaxed pr-10">Most practices are fully live on billing and staffing within two weeks of signing, including EHR access setup and payer verification.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q w-full flex items-center justify-between py-6 text-left focus-ring">
+          <span class="font-semibold text-ink pr-6">Can I get just one service, like SEO or a new website?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-coral shrink-0 transition-transform"></i>
+        </button>
+        <div class="accordion-panel">
+          <p class="pb-6 text-ink/60 leading-relaxed pr-10">Yes. Every service is available on its own or bundled — most practices start with billing and add staffing or marketing later.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q w-full flex items-center justify-between py-6 text-left focus-ring">
+          <span class="font-semibold text-ink pr-6">Is there a long-term contract?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-coral shrink-0 transition-transform"></i>
+        </button>
+        <div class="accordion-panel">
+          <p class="pb-6 text-ink/60 leading-relaxed pr-10">No. Services run month-to-month after onboarding — we'd rather earn your renewal with results than lock you in.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q w-full flex items-center justify-between py-6 text-left focus-ring">
+          <span class="font-semibold text-ink pr-6">How is patient data kept secure?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-coral shrink-0 transition-transform"></i>
+        </button>
+        <div class="accordion-panel">
+          <p class="pb-6 text-ink/60 leading-relaxed pr-10">All staff are HIPAA-trained, access is role-restricted, and data is handled through encrypted, audit-logged systems.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="contact" class="bg-navy relative overflow-hidden py-24">
+  <div class="absolute inset-0 opacity-[0.06]" style="background-image:radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+  <div class="relative max-w-3xl mx-auto px-5 text-center reveal">
+    <p class="eyebrow text-coral mb-4">Get Started</p>
+    <h2 class="font-display text-3xl sm:text-4xl font-semibold text-white leading-tight">Let's take paperwork off your plate</h2>
+    <p class="mt-4 text-white/60">Tell us a bit about your practice and we'll follow up within one business day.</p>
+
+    <form class="mt-10 grid sm:grid-cols-2 gap-4 text-left" onsubmit="event.preventDefault(); document.getElementById('form-success').classList.remove('hidden'); this.reset();">
+      <div>
+        <label class="text-xs font-semibold text-white/70">Full name</label>
+        <input required type="text" class="mt-1.5 w-full rounded-xl bg-white/10 border border-white/15 text-white placeholder-white/30 px-4 py-3 focus-ring" placeholder="Dr. Jane Smith">
+      </div>
+      <div>
+        <label class="text-xs font-semibold text-white/70">Practice name</label>
+        <input required type="text" class="mt-1.5 w-full rounded-xl bg-white/10 border border-white/15 text-white placeholder-white/30 px-4 py-3 focus-ring" placeholder="Smith Family Practice">
+      </div>
+      <div>
+        <label class="text-xs font-semibold text-white/70">Email</label>
+        <input required type="email" class="mt-1.5 w-full rounded-xl bg-white/10 border border-white/15 text-white placeholder-white/30 px-4 py-3 focus-ring" placeholder="jane@practice.com">
+      </div>
+      <div>
+        <label class="text-xs font-semibold text-white/70">Phone</label>
+        <input type="tel" class="mt-1.5 w-full rounded-xl bg-white/10 border border-white/15 text-white placeholder-white/30 px-4 py-3 focus-ring" placeholder="(800) 555-1234">
+      </div>
+      <div class="sm:col-span-2">
+        <label class="text-xs font-semibold text-white/70">Service you're interested in</label>
+        <select class="mt-1.5 w-full rounded-xl bg-white/10 border border-white/15 text-white px-4 py-3 focus-ring">
+          <option class="text-ink">Billing and Coding Services</option>
+          <option class="text-ink">Credentialing Services</option>
+          <option class="text-ink">Virtual Assistant Services</option>
+          <option class="text-ink">Virtual Medical Scribe Services</option>
+          <option class="text-ink">Website Development Services</option>
+          <option class="text-ink">SEO Marketing</option>
+          <option class="text-ink">Not sure — send me options</option>
+        </select>
+      </div>
+      <div class="sm:col-span-2">
+        <button type="submit" class="w-full bg-coral hover:bg-coral/90 text-white font-semibold px-8 py-4 rounded-xl transition-colors focus-ring">Request My Free Audit</button>
+      </div>
+    </form>
+    <p id="form-success" class="hidden mt-5 text-teal bg-white rounded-xl px-4 py-3 text-sm font-medium">Thanks — your request was received. We'll be in touch within one business day.</p>
+  </div>
+</section>
+
+<!-- ============ INSIGHTS / BLOG ============ -->
+<section id="insights" class="bg-white py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-6 reveal">
+      <div>
+        <p class="eyebrow text-coral mb-4">Insights</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight max-w-lg">Practice management, explained simply</h2>
+      </div>
+      <a href="#" class="hidden sm:flex items-center gap-2 text-sm font-semibold text-teal">View all articles <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-3 gap-8">
+      <a href="#" class="reveal group block">
+        <div class="rounded-2xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" alt="">
+        </div>
+        <p class="mt-5 text-xs font-semibold text-coral uppercase tracking-wide">Billing</p>
+        <h3 class="mt-2 font-display text-lg font-semibold text-ink leading-snug">5 claim denial patterns most practices miss</h3>
+        <p class="mt-2 text-sm text-ink/50">6 min read</p>
+      </a>
+      <a href="#" class="reveal group block">
+        <div class="rounded-2xl overflow-hidden">
+          <img src="https://plus.unsplash.com/premium_photo-1681996543579-b24cd01d4516?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" alt="">
+        </div>
+        <p class="mt-5 text-xs font-semibold text-coral uppercase tracking-wide">Credentialing</p>
+        <h3 class="mt-2 font-display text-lg font-semibold text-ink leading-snug">A provider's guide to staying in-network without the paperwork</h3>
+        <p class="mt-2 text-sm text-ink/50">4 min read</p>
+      </a>
+      <a href="#" class="reveal group block">
+        <div class="rounded-2xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" alt="">
+        </div>
+        <p class="mt-5 text-xs font-semibold text-coral uppercase tracking-wide">Marketing</p>
+        <h3 class="mt-2 font-display text-lg font-semibold text-ink leading-snug">Why local SEO matters more than a bigger ad budget</h3>
+        <p class="mt-2 text-sm text-ink/50">5 min read</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-navydeep pt-20 pb-8">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
+      <div class="lg:col-span-2">
+        <a href="#top" class="flex items-center gap-2">
+          <span class="w-9 h-9 rounded-lg bg-coral flex items-center justify-center">
+            <i data-lucide="activity" class="w-5 h-5 text-white"></i>
+          </span>
+          <span class="font-display text-xl font-semibold text-white">Vantage <span class="text-coral">RCM</span></span>
+        </a>
+        <p class="mt-5 text-white/50 text-sm leading-relaxed max-w-xs">Billing, credentialing, virtual staffing, and digital growth for independent healthcare practices.</p>
+       <div class="flex items-center gap-3">
+  
+  <!-- Facebook -->
+  <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="Facebook">
+    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+  </a>
+
+  <!-- LinkedIn -->
+  <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="LinkedIn">
+    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+    </svg>
+  </a>
+
+  <!-- Twitter / X -->
+  <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="Twitter">
+    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+  </a>
+
+  <!-- Instagram -->
+  <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="Instagram">
+    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+  </a>
+
+</div>
+      </div>
+
+      <div>
+        <p class="text-white font-semibold text-sm mb-5">Services</p>
+        <ul class="space-y-3 text-sm text-white/50">
+          <li><a href="#services" class="hover:text-coral transition-colors">Billing &amp; Coding</a></li>
+          <li><a href="#services" class="hover:text-coral transition-colors">Credentialing</a></li>
+          <li><a href="#services" class="hover:text-coral transition-colors">Virtual Assistant</a></li>
+          <li><a href="#services" class="hover:text-coral transition-colors">Virtual Medical Scribe</a></li>
+          <li><a href="#services" class="hover:text-coral transition-colors">Website Development</a></li>
+          <li><a href="#services" class="hover:text-coral transition-colors">SEO Marketing</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-white font-semibold text-sm mb-5">Company</p>
+        <ul class="space-y-3 text-sm text-white/50">
+          <li><a href="#why" class="hover:text-coral transition-colors">Why Us</a></li>
+          <li><a href="#process" class="hover:text-coral transition-colors">Our Process</a></li>
+          <li><a href="#insights" class="hover:text-coral transition-colors">Insights</a></li>
+          <li><a href="#faq" class="hover:text-coral transition-colors">FAQ</a></li>
+          <li><a href="#contact" class="hover:text-coral transition-colors">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-white font-semibold text-sm mb-5">Contact</p>
+        <ul class="space-y-3 text-sm text-white/50">
+          <li class="flex items-start gap-2"><i data-lucide="map-pin" class="w-4 h-4 mt-0.5 text-coral shrink-0"></i>500 Market St, Suite 210, Austin, TX</li>
+          <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-coral shrink-0"></i>(800) 555-1234</li>
+          <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-coral shrink-0"></i>hello@vantagercm.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-white/40 text-xs">© 2026 Vantage RCM. All rights reserved.</p>
+      <div class="flex gap-6 text-xs text-white/40">
+        <a href="#" class="hover:text-coral transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-coral transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-coral transition-colors">HIPAA Notice</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ SCRIPTS ============ -->
+<script>
+  lucide.createIcons();
+
+  // Sticky nav background on scroll
+  const navBg = document.getElementById('nav-bg');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      navBg.classList.add('bg-navy', 'shadow-lg');
+    } else {
+      navBg.classList.remove('shadow-lg');
+      if (window.scrollY <= 40) navBg.classList.add('bg-navy');
+    }
+  });
+  navBg.classList.add('bg-navy'); // solid nav by default for contrast on hero
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = !mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(!isOpen));
+    menuBtn.innerHTML = isOpen ? '<i data-lucide="menu" class="w-7 h-7"></i>' : '<i data-lucide="x" class="w-7 h-7"></i>';
+    lucide.createIcons();
+  });
+  document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    menuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+    lucide.createIcons();
+  }));
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // About tabs
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => { b.classList.remove('text-navy', 'border-coral'); b.classList.add('text-ink/40', 'border-transparent'); });
+      btn.classList.add('text-navy', 'border-coral');
+      btn.classList.remove('text-ink/40', 'border-transparent');
+      const target = btn.dataset.tab;
+      tabPanels.forEach(p => p.classList.toggle('hidden', p.dataset.panel !== target));
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    const panel = item.querySelector('.accordion-panel');
+    const icon = item.querySelector('.faq-icon');
+    btn.addEventListener('click', () => {
+      const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+      document.querySelectorAll('.accordion-panel').forEach(p => p.style.maxHeight = '0px');
+      document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = 'rotate(0deg)');
+      if (!isOpen) {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        icon.style.transform = 'rotate(45deg)';
+      }
+    });
+  });
+
+  // Testimonial slider
+  const track = document.getElementById('t-track');
+  const slides = track.children.length;
+  let tIndex = 0;
+  function slidesPerView() {
+    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 640) return 2;
+    return 1;
+  }
+  function updateSlider() {
+    const maxIndex = Math.max(0, slides - slidesPerView());
+    tIndex = Math.min(tIndex, maxIndex);
+    const slideWidth = track.children[0].getBoundingClientRect().width + 24; // gap-6 = 24px
+    track.style.transform = `translateX(-${tIndex * slideWidth}px)`;
+  }
+  document.getElementById('t-next').addEventListener('click', () => {
+    const maxIndex = Math.max(0, slides - slidesPerView());
+    tIndex = tIndex >= maxIndex ? 0 : tIndex + 1;
+    updateSlider();
+  });
+  document.getElementById('t-prev').addEventListener('click', () => {
+    const maxIndex = Math.max(0, slides - slidesPerView());
+    tIndex = tIndex <= 0 ? maxIndex : tIndex - 1;
+    updateSlider();
+  });
+  window.addEventListener('resize', updateSlider);
+  updateSlider();
+</script>
+
+</body>
+</html>
