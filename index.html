@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Vantage RCM — Medical Billing, Credentialing &amp; Virtual Staffing for Practices</title>
+<title>MEDI-Q — Medical Billing, Credentialing &amp; Virtual Staffing for Practices</title>
 
 <!-- Tailwind CSS (CDN) -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -22,25 +22,26 @@
           sand: '#F7F5F1',
         },
         fontFamily: {
-          display: ['"Fraunces"', 'serif'],
-          body: ['"Inter"', 'sans-serif'],
+          display: ['"sans-serif"', 'sans-serif'],
+          body: ['"Open Sans"', 'sans-serif'],
         },
       },
     },
   };
 </script>
 
-<!-- Fonts -->
+<!-- Google Fonts (Raleway for Headings/Display + Open Sans for Body) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 <!-- Icons -->
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
 <style>
   html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background:#F7F5F1; color:#0E1C2B; }
-  .font-display { font-family: 'Fraunces', serif; }
+  body { font-family: 'Open Sans', sans-serif; background:#F7F5F1; color:#0E1C2B; }
+  .font-display { font-family: 'Raleway', sans-serif; }
   .eyebrow { letter-spacing: .14em; text-transform: uppercase; font-weight:600; font-size:.72rem; }
 
   /* Pipeline signature element */
@@ -75,95 +76,89 @@
 </head>
 
 <body class="antialiased">
-
 <!-- ============ NAV ============ -->
-<header id="site-header" class="fixed top-0 bg-navy/0 inset-x-0 z-50 transition-colors duration-300">
-  <div class="bg-#0A2038 backdrop-blur-0" id="nav-bg">
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 bg-[#0A2038] transition-colors duration-300">
+  <div id="nav-bg" class="backdrop-blur-none">
     <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      
+      <!-- Main Flex Container: Left, Center, Right Alignment -->
       <div class="flex items-center justify-between h-20">
-        <a href="#top" class="flex items-center gap-2 focus-ring">
-<div class="flex items-center gap-3 font-sans">
-  
-  <!-- Smaller Logo SVG Icon -->
-  <div class="w-10 h-10 flex items-center justify-center shrink-0">
-    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-      <!-- Background M Shape Ribbon using brand teal/navy -->
-      <path d="M10 75V35C10 30 15 25 20 25H35L50 50L65 25H80C85 25 90 30 90 35V75" stroke="url(#customGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-      <!-- Stethoscope Wire & Head -->
-      <path d="M30 25V55C30 70 45 75 55 60" stroke="#0E1C2B" stroke-width="6" stroke-linecap="round"/>
-      <circle cx="55" cy="65" r="7" fill="#0E7C86" stroke="#ffffff" stroke-width="3"/>
-      <circle cx="28" cy="22" r="4" fill="#0E1C2B"/>
-      <circle cx="72" cy="22" r="4" fill="#0E1C2B"/>
-      <!-- Gradient Definition using brand colors -->
-      <defs>
-        <linearGradient id="customGrad" x1="10" y1="25" x2="90" y2="75" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#0F2C4C"/>
-          <stop offset="1" stop-color="#0E7C86"/>
-        </linearGradient>
-      </defs>
-    </svg>
-  </div>
+        
+        <!-- Left: Logo -->
+        <a href="#top" class="flex items-center gap-3 shrink-0 focus-ring">
+          <!-- Logo SVG Icon -->
+          <div class="w-10 h-10 flex items-center justify-center shrink-0">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <path d="M10 75V35C10 30 15 25 20 25H35L50 50L65 25H80C85 25 90 30 90 35V75" stroke="url(#brightGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M30 25V55C30 70 45 75 55 60" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="55" cy="65" r="7" fill="#00E5FF" stroke="#FFFFFF" stroke-width="3"/>
+              <circle cx="28" cy="22" r="4" fill="#FFFFFF"/>
+              <circle cx="72" cy="22" r="4" fill="#FFFFFF"/>
+              <defs>
+                <linearGradient id="brightGrad" x1="10" y1="25" x2="90" y2="75" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#00E5FF"/>
+                  <stop offset="1" stop-color="#38BDF8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
 
-  <!-- Logo Text & Taglines -->
-  <div class="flex flex-col">
-    <!-- Brand Name (Using 'ink' color and 'coral' highlight for Q) -->
-    <div class="text-2xl font-extrabold text-[var(--ink,#0E1C2B)] tracking-wider leading-none">
-      MEDI<span class="text-[var(--coral,#FF6B4A)]">Q</span>
-    </div>
-    
-    <!-- Medical Billing Tagline (Using 'teal' color) -->
-    <div class="text-[9px] font-bold text-[var(--teal,#0E7C86)] tracking-[0.2em] mt-1">
-      MEDICAL BILLING
-    </div>
-    
-   
-  </div>
+          <!-- Logo Text -->
+          <div class="flex flex-col">
+            <div class="text-2xl font-extrabold text-white tracking-wider leading-none">
+              MEDI<span class="text-[#FF6B4A]">Q</span>
+            </div>
+            <div class="text-[9px] font-bold text-[#F7F5F1] tracking-[0.2em] mt-1">
+              MEDICAL BILLING
+            </div>
+          </div>
+        </a>
 
-</div>       </a>
+        <!-- Center: Navigation Links -->
+        <nav class="hidden lg:flex items-center justify-center gap-7 text-sm font-medium text-white/90">
+          <a href="#home" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Home</a>
+          <a href="about.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">About Us</a>
+          <a href="specialities.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Specialities</a>
+          <a href="services.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Services</a>
+          <a href="blogs.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Blogs</a>
+          <a href="contact.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Contact Us</a>
+        </nav>
 
-       <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-white/90">
-    <a href="#home" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Home</a>
-    <a href="about.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">About Us</a>
-    <a href="specialities.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Specialities</a>
-    <a href="services.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Services</a>
-    <a href="blogs.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Blogs</a>
-    <a href="contact.html" class="hover:text-[var(--coral,#FF6B4A)] transition-colors">Contact Us</a>
-  </nav>
+        <!-- Right: Phone & CTA Button -->
+        <div class="hidden lg:flex items-center justify-end gap-5 shrink-0">
+          <a href="tel:+18005551234" class="flex items-center gap-2 text-sm text-white/90 hover:text-white">
+            <i data-lucide="phone-call" class="w-4 h-4 text-[var(--coral,#FF6B4A)]"></i>
+            <span>(800) 555-1234</span>
+          </a>
+          <a href="contact.html" class="bg-[var(--coral,#FF6B4A)] hover:bg-[var(--coral,#FF6B4A)]/90 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
+            Get a Free Audit
+          </a>
+        </div>
 
-  <!-- Right Actions (Phone & CTA) -->
-  <div class="hidden lg:flex items-center gap-5">
-    <a href="tel:+18005551234" class="flex items-center gap-2 text-sm text-white/90 hover:text-white">
-      <i data-lucide="phone-call" class="w-4 h-4 text-[var(--coral,#FF6B4A)]"></i>
-      <span>(800) 555-1234</span>
-    </a>
-    <a href="contact.html" class="bg-[var(--coral,#FF6B4A)] hover:bg-[var(--coral,#FF6B4A)]/90 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
-      Get a Free Audit
-    </a>
-  </div>
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="lg:hidden text-white focus:outline-none" aria-label="Open menu" aria-expanded="false">
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
 
-  <!-- Mobile Menu Button -->
-  <button id="menu-btn" class="lg:hidden text-white focus:outline-none" aria-label="Open menu" aria-expanded="false">
-    <i data-lucide="menu" class="w-7 h-7"></i>
-  </button>
       </div>
     </div>
   </div>
 
-  <!-- mobile menu -->
- <div id="mobile-menu" class="lg:hidden hidden bg-[var(--navydeep,#0A2038)] border-t border-white/10">
-  <nav class="flex flex-col px-5 py-4 gap-1 text-white/90 text-sm font-medium">
-    <a href="#home" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Home</a>
-    <a href="about.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">About Us</a>
-    <a href="specialities.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Specialities</a>
-    <a href="services.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Services</a>
-    <a href="blogs.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Blogs</a>
-    <a href="contact.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Contact Us</a>
-    
-    <a href="contact.html" class="mt-4 bg-[var(--coral,#FF6B4A)] hover:bg-[var(--coral,#FF6B4A)]/90 text-white text-center font-semibold px-5 py-3 rounded-full transition-colors">
-      Get a Free Audit
-    </a>
-  </nav>
-</div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="lg:hidden hidden bg-[var(--navydeep,#0A2038)] border-t border-white/10">
+    <nav class="flex flex-col px-5 py-4 gap-1 text-white/90 text-sm font-medium">
+      <a href="#home" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Home</a>
+      <a href="about.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">About Us</a>
+      <a href="specialities.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Specialities</a>
+      <a href="services.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Services</a>
+      <a href="blogs.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Blogs</a>
+      <a href="contact.html" class="py-3 border-b border-white/10 hover:text-[var(--coral,#FF6B4A)] transition-colors">Contact Us</a>
+      
+      <a href="contact.html" class="mt-4 bg-[var(--coral,#FF6B4A)] hover:bg-[var(--coral,#FF6B4A)]/90 text-white text-center font-semibold px-5 py-3 rounded-full transition-colors">
+        Get a Free Audit
+      </a>
+    </nav>
+  </div>
 </header>
 
 <!-- ============ HERO ============ -->
@@ -212,7 +207,7 @@
 
     <div class="reveal in relative">
       <div class="rounded-[28px] overflow-hidden border border-white/10 shadow-2xl">
-        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1200&auto=format&fit=crop" alt="Medical billing specialist reviewing claims on a laptop" class="w-full h-[420px] object-cover" />
+        <img src="mainHero.png" alt="Medical billing specialist reviewing claims on a laptop" class="w-full h-[420px] object-cover" />
       </div>
       <div class="absolute -bottom-8 -left-8 bg-white rounded-2xl shadow-xl p-5 w-60 hidden sm:block">
         <div class="flex items-center gap-3">
@@ -248,7 +243,7 @@
 <section class="bg-sand py-24 lg:py-32">
   <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
     <div class="reveal order-2 lg:order-1 relative">
-      <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1000&auto=format&fit=crop" alt="Virtual assistant team supporting a medical practice" class="rounded-3xl w-full h-[440px] object-cover" />
+      <img src="hero3.png" alt="Virtual assistant team supporting a medical practice" class="rounded-3xl w-full h-[440px] object-cover" />
       <div class="absolute -top-6 -right-6 bg-navy text-white rounded-2xl p-5 w-48 shadow-xl hidden sm:block">
         <p class="font-display text-2xl font-semibold">7+ Yrs</p>
         <p class="text-white/60 text-xs mt-1">Serving U.S. healthcare practices</p>
@@ -456,7 +451,7 @@
     </div>
 
     <div class="reveal relative">
-      <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?q=80&w=1000&auto=format&fit=crop" alt="Front desk staff assisting a patient" class="rounded-3xl w-full h-[460px] object-cover" />
+      <img src="hero4.png" alt="Front desk staff assisting a patient" class="rounded-3xl w-full h-[460px] object-cover" />
     </div>
   </div>
 </section>
@@ -502,7 +497,7 @@
           </div>
           <p class="text-ink/70 leading-relaxed">"Denials dropped within the first month. Our front desk finally isn't fielding billing calls all day."</p>
           <div class="mt-6 flex items-center gap-3">
-            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=200&auto=format&fit=crop" class="w-11 h-11 rounded-full object-cover" alt="">
+            <img src="dr3.png" class="w-11 h-11 rounded-full object-cover" alt="">
             <div>
               <p class="text-sm font-semibold text-ink">Dr. Amina Farooq</p>
               <p class="text-xs text-ink/50">Family Medicine, Lahore Care Clinic</p>
@@ -516,7 +511,7 @@
           </div>
           <p class="text-ink/70 leading-relaxed">"Credentialing used to take us months and multiple missed emails. Vantage tracked every payer for us end to end."</p>
           <div class="mt-6 flex items-center gap-3">
-            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=200&auto=format&fit=crop" class="w-11 h-11 rounded-full object-cover" alt="">
+            <img src="dr2.png" class="w-11 h-11 rounded-full object-cover" alt="">
             <div>
               <p class="text-sm font-semibold text-ink">Dr. Michael Owens</p>
               <p class="text-xs text-ink/50">Urgent Care Group</p>
@@ -528,9 +523,9 @@
           <div class="flex gap-1 text-coral mb-4">
             <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
           </div>
-          <p class="text-ink/70 leading-relaxed">"The virtual scribe alone gave our providers two extra hours back every day. The new website has doubled our online bookings."</p>
+          <p class="text-ink/70 leading-relaxed">"The virtual scribe alone gave our providers extra hours back. The new website has doubled our online bookings."</p>
           <div class="mt-6 flex items-center gap-3">
-            <img src="https://images.unsplash.com/photo-1607990283143-e81e7a2c9349?q=80&w=200&auto=format&fit=crop" class="w-11 h-11 rounded-full object-cover" alt="">
+            <img src="dr1.png" class="w-11 h-11 rounded-full object-cover" alt="">
             <div>
               <p class="text-sm font-semibold text-ink">Dr. Sana Iqbal</p>
               <p class="text-xs text-ink/50">Behavioral Health Practice</p>
@@ -607,34 +602,33 @@
   </div>
 </section>
 
-<!-- ============ FINAL CTA ============ -->
-<section id="contact" class="bg-navy relative overflow-hidden py-24">
-  <div class="absolute inset-0 opacity-[0.06]" style="background-image:radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+<!-- ============ FINAL CTA (Ultra Light Theme) ============ -->
+<section id="contact" class="bg-white relative overflow-hidden py-24">
   <div class="relative max-w-3xl mx-auto px-5 text-center reveal">
     <p class="eyebrow text-coral mb-4">Get Started</p>
-    <h2 class="font-display text-3xl sm:text-4xl font-semibold text-white leading-tight">Let's take paperwork off your plate</h2>
-    <p class="mt-4 text-white/60">Tell us a bit about your practice and we'll follow up within one business day.</p>
+    <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight">Let's take paperwork off your plate</h2>
+    <p class="mt-4 text-ink/70">Tell us a bit about your practice and we'll follow up within one business day.</p>
 
     <form class="mt-10 grid sm:grid-cols-2 gap-4 text-left" onsubmit="event.preventDefault(); document.getElementById('form-success').classList.remove('hidden'); this.reset();">
       <div>
-        <label class="text-xs font-semibold text-white/70">Full name</label>
-        <input required type="text" class="mt-1.5 w-full rounded-xl bg-white/10 border border-white/15 text-white placeholder-white/30 px-4 py-3 focus-ring" placeholder="Dr. Jane Smith">
+        <label class="text-xs font-semibold text-ink">Full name</label>
+        <input required type="text" class="mt-1.5 w-full rounded-xl bg-sand border border-tealsoft text-ink placeholder:text-ink/40 px-4 py-3 focus-ring" placeholder="Dr. Jane Smith">
       </div>
       <div>
-        <label class="text-xs font-semibold text-white/70">Practice name</label>
-        <input required type="text" class="mt-1.5 w-full rounded-xl bg-white/10 border border-white/15 text-white placeholder-white/30 px-4 py-3 focus-ring" placeholder="Smith Family Practice">
+        <label class="text-xs font-semibold text-ink">Practice name</label>
+        <input required type="text" class="mt-1.5 w-full rounded-xl bg-sand border border-tealsoft text-ink placeholder:text-ink/40 px-4 py-3 focus-ring" placeholder="Smith Family Practice">
       </div>
       <div>
-        <label class="text-xs font-semibold text-white/70">Email</label>
-        <input required type="email" class="mt-1.5 w-full rounded-xl bg-white/10 border border-white/15 text-white placeholder-white/30 px-4 py-3 focus-ring" placeholder="jane@practice.com">
+        <label class="text-xs font-semibold text-ink">Email</label>
+        <input required type="email" class="mt-1.5 w-full rounded-xl bg-sand border border-tealsoft text-ink placeholder:text-ink/40 px-4 py-3 focus-ring" placeholder="jane@practice.com">
       </div>
       <div>
-        <label class="text-xs font-semibold text-white/70">Phone</label>
-        <input type="tel" class="mt-1.5 w-full rounded-xl bg-white/10 border border-white/15 text-white placeholder-white/30 px-4 py-3 focus-ring" placeholder="(800) 555-1234">
+        <label class="text-xs font-semibold text-ink">Phone</label>
+        <input type="tel" class="mt-1.5 w-full rounded-xl bg-sand border border-tealsoft text-ink placeholder:text-ink/40 px-4 py-3 focus-ring" placeholder="(800) 555-1234">
       </div>
       <div class="sm:col-span-2">
-        <label class="text-xs font-semibold text-white/70">Service you're interested in</label>
-        <select class="mt-1.5 w-full rounded-xl bg-white/10 border border-white/15 text-white px-4 py-3 focus-ring">
+        <label class="text-xs font-semibold text-ink">Service you're interested in</label>
+        <select class="mt-1.5 w-full rounded-xl bg-sand border border-tealsoft text-ink px-4 py-3 focus-ring">
           <option class="text-ink">Billing and Coding Services</option>
           <option class="text-ink">Credentialing Services</option>
           <option class="text-ink">Virtual Assistant Services</option>
@@ -645,15 +639,15 @@
         </select>
       </div>
       <div class="sm:col-span-2">
-        <button type="submit" class="w-full bg-coral hover:bg-coral/90 text-white font-semibold px-8 py-4 rounded-xl transition-colors focus-ring">Request My Free Audit</button>
+        <button type="submit" class="w-full bg-coral hover:bg-navy text-white font-semibold px-8 py-4 rounded-xl transition-colors focus-ring">Request My Free Audit</button>
       </div>
     </form>
-    <p id="form-success" class="hidden mt-5 text-teal bg-white rounded-xl px-4 py-3 text-sm font-medium">Thanks — your request was received. We'll be in touch within one business day.</p>
+    <p id="form-success" class="hidden mt-5 text-teal bg-tealsoft rounded-xl px-4 py-3 text-sm font-medium">Thanks — your request was received. We'll be in touch within one business day.</p>
   </div>
 </section>
 
 <!-- ============ INSIGHTS / BLOG ============ -->
-<section id="insights" class="bg-white py-24 lg:py-32">
+<section id="insights" class="bg-#F7F5F1  py-24 lg:py-32">
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="flex flex-wrap items-end justify-between gap-6 reveal">
       <div>
@@ -666,7 +660,7 @@
     <div class="mt-14 grid md:grid-cols-3 gap-8">
       <a href="#" class="reveal group block">
         <div class="rounded-2xl overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" alt="">
+          <img src="Billing.png" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" alt="">
         </div>
         <p class="mt-5 text-xs font-semibold text-coral uppercase tracking-wide">Billing</p>
         <h3 class="mt-2 font-display text-lg font-semibold text-ink leading-snug">5 claim denial patterns most practices miss</h3>
@@ -674,7 +668,7 @@
       </a>
       <a href="#" class="reveal group block">
         <div class="rounded-2xl overflow-hidden">
-          <img src="https://plus.unsplash.com/premium_photo-1681996543579-b24cd01d4516?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" alt="">
+          <img src="Credentialing.png" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" alt="">
         </div>
         <p class="mt-5 text-xs font-semibold text-coral uppercase tracking-wide">Credentialing</p>
         <h3 class="mt-2 font-display text-lg font-semibold text-ink leading-snug">A provider's guide to staying in-network without the paperwork</h3>
@@ -682,7 +676,7 @@
       </a>
       <a href="#" class="reveal group block">
         <div class="rounded-2xl overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" alt="">
+          <img src="seo.png" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" alt="">
         </div>
         <p class="mt-5 text-xs font-semibold text-coral uppercase tracking-wide">Marketing</p>
         <h3 class="mt-2 font-display text-lg font-semibold text-ink leading-snug">Why local SEO matters more than a bigger ad budget</h3>
@@ -697,12 +691,36 @@
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
       <div class="lg:col-span-2">
-        <a href="#top" class="flex items-center gap-2">
-          <span class="w-9 h-9 rounded-lg bg-coral flex items-center justify-center">
-            <i data-lucide="activity" class="w-5 h-5 text-white"></i>
-          </span>
-          <span class="font-display text-xl font-semibold text-white">Vantage <span class="text-coral">RCM</span></span>
-        </a>
+        <a href="#top" class="flex items-center gap-3 shrink-0 focus-ring">
+  <!-- Bright Logo SVG Icon -->
+  <div class="w-10 h-10 flex items-center justify-center shrink-0">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+      <!-- M Shape Ribbon Gradient -->
+      <path d="M10 75V35C10 30 15 25 20 25H35L50 50L65 25H80C85 25 90 30 90 35V75" stroke="url(#brightGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Stethoscope Wire & Head -->
+      <path d="M30 25V55C30 70 45 75 55 60" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="55" cy="65" r="7" fill="#00E5FF" stroke="#FFFFFF" stroke-width="3"/>
+      <circle cx="28" cy="22" r="4" fill="#FFFFFF"/>
+      <circle cx="72" cy="22" r="4" fill="#FFFFFF"/>
+      <defs>
+        <linearGradient id="brightGrad" x1="10" y1="25" x2="90" y2="75" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#00E5FF"/>
+          <stop offset="1" stop-color="#38BDF8"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Logo Text & Tagline -->
+  <div class="flex flex-col">
+    <div class="text-2xl font-extrabold text-white tracking-wider leading-none">
+      MEDI<span class="text-[#FF6B4A]">Q</span>
+    </div>
+    <div class="text-[9px] font-bold text-[#F7F5F1] tracking-[0.2em] mt-1">
+      MEDICAL BILLING
+    </div>
+  </div>
+</a>
         <p class="mt-5 text-white/50 text-sm leading-relaxed max-w-xs">Billing, credentialing, virtual staffing, and digital growth for independent healthcare practices.</p>
        <div class="flex items-center gap-3">
   

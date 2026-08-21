@@ -22,17 +22,18 @@
           sand: '#F7F5F1',
         },
         fontFamily: {
-          display: ['"Fraunces"', 'serif'],
-          body: ['"Inter"', 'sans-serif'],
+          display: ['"sans-serif"', 'sans-serif'],
+          body: ['"Open Sans"', 'sans-serif'],
         },
       },
     },
   };
 </script>
 
-<!-- Fonts -->
+<!-- Google Fonts (Raleway for Headings/Display + Open Sans for Body) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 <!-- Icons -->
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -43,8 +44,8 @@
     --tealsoft:#E4F2F1; --coral:#FF6B4A; --coralsoft:#FFE7E0; --sand:#F7F5F1;
   }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background:#F7F5F1; color:#0E1C2B; }
-  .font-display { font-family: 'Fraunces', serif; }
+  body { font-family: 'Open Sans', sans-serif; background:#F7F5F1; color:#0E1C2B; }
+  .font-display { font-family: 'Raleway', sans-serif; }
   .eyebrow { letter-spacing: .14em; text-transform: uppercase; font-weight:600; font-size:.72rem; }
 
   .reveal { opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
@@ -65,48 +66,46 @@
 
 <body class="antialiased">
 
-
-
-<!-- ============ NAV (as provided) ============ -->
-<header id="site-header" class="sticky top-0 bg-navy/0 inset-x-0 z-50 transition-colors duration-300">
-  <div class="bg-navy backdrop-blur-0" id="nav-bg">
+<!-- ============ NAV (Merged & Aligned) ============ -->
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 bg-[#0A2038] transition-colors duration-300">
+  <div id="nav-bg" class="backdrop-blur-none">
     <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      
+      <!-- Main Flex Container: Left, Center, Right Alignment -->
       <div class="flex items-center justify-between h-20">
-        <a href="index.html" class="flex items-center gap-2 focus-ring">
-          <div class="flex items-center gap-3 font-sans">
+        
+        <!-- Left: Bright Logo -->
+        <a href="index.html" class="flex items-center gap-3 shrink-0 focus-ring">
+          <!-- Logo SVG Icon -->
+          <div class="w-10 h-10 flex items-center justify-center shrink-0">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <path d="M10 75V35C10 30 15 25 20 25H35L50 50L65 25H80C85 25 90 30 90 35V75" stroke="url(#brightGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M30 25V55C30 70 45 75 55 60" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="55" cy="65" r="7" fill="#00E5FF" stroke="#FFFFFF" stroke-width="3"/>
+              <circle cx="28" cy="22" r="4" fill="#FFFFFF"/>
+              <circle cx="72" cy="22" r="4" fill="#FFFFFF"/>
+              <defs>
+                <linearGradient id="brightGrad" x1="10" y1="25" x2="90" y2="75" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#00E5FF"/>
+                  <stop offset="1" stop-color="#38BDF8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
 
-            <!-- Logo SVG Icon -->
-            <div class="w-10 h-10 flex items-center justify-center shrink-0">
-              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                <path d="M10 75V35C10 30 15 25 20 25H35L50 50L65 25H80C85 25 90 30 90 35V75" stroke="url(#customGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M30 25V55C30 70 45 75 55 60" stroke="#0E1C2B" stroke-width="6" stroke-linecap="round"/>
-                <circle cx="55" cy="65" r="7" fill="#0E7C86" stroke="#ffffff" stroke-width="3"/>
-                <circle cx="28" cy="22" r="4" fill="#0E1C2B"/>
-                <circle cx="72" cy="22" r="4" fill="#0E1C2B"/>
-                <defs>
-                  <linearGradient id="customGrad" x1="10" y1="25" x2="90" y2="75" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#0F2C4C"/>
-                    <stop offset="1" stop-color="#0E7C86"/>
-                  </linearGradient>
-                </defs>
-              </svg>
+          <!-- Logo Text -->
+          <div class="flex flex-col">
+            <div class="text-2xl font-extrabold text-white tracking-wider leading-none">
+              MEDI<span class="text-coral">Q</span>
             </div>
-
-            <!-- Logo Text & Taglines -->
-            <div class="flex flex-col">
-              <div class="text-2xl font-extrabold text-white tracking-wider leading-none">
-                MEDI<span class="text-coral">Q</span>
-              </div>
-              <div class="text-[9px] font-bold text-teal tracking-[0.2em] mt-1">
-                MEDICAL BILLING
-              </div>
-             
+            <div class="text-[9px] font-bold text-sand tracking-[0.2em] mt-1">
+              MEDICAL BILLING
             </div>
-
           </div>
         </a>
 
-        <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-white/90">
+        <!-- Center: Navigation Links -->
+        <nav class="hidden lg:flex items-center justify-center gap-7 text-sm font-medium text-white/90">
           <a href="index.html" class="hover:text-coral transition-colors">Home</a>
           <a href="about.html" class="text-coral">About Us</a>
           <a href="specialities.html" class="hover:text-coral transition-colors">Specialities</a>
@@ -115,7 +114,8 @@
           <a href="contact.html" class="hover:text-coral transition-colors">Contact Us</a>
         </nav>
 
-        <div class="hidden lg:flex items-center gap-5">
+        <!-- Right: Phone & CTA Button -->
+        <div class="hidden lg:flex items-center justify-end gap-5 shrink-0">
           <a href="tel:+18005551234" class="flex items-center gap-2 text-sm text-white/90 hover:text-white">
             <i data-lucide="phone-call" class="w-4 h-4 text-coral"></i>
             <span>(800) 555-1234</span>
@@ -125,17 +125,19 @@
           </a>
         </div>
 
+        <!-- Mobile Menu Button -->
         <button id="menu-btn" class="lg:hidden text-white focus-ring" aria-label="Open menu" aria-expanded="false">
           <i data-lucide="menu" class="w-7 h-7"></i>
         </button>
+
       </div>
     </div>
   </div>
 
-  <!-- mobile menu -->
+  <!-- Mobile Menu -->
   <div id="mobile-menu" class="lg:hidden hidden bg-navydeep border-t border-white/10">
     <nav class="flex flex-col px-5 py-4 gap-1 text-white/90 text-sm font-medium">
-      <a href="index.html#top" class="py-3 border-b border-white/10 hover:text-coral transition-colors">Home</a>
+      <a href="index.html" class="py-3 border-b border-white/10 hover:text-coral transition-colors">Home</a>
       <a href="about.html" class="py-3 border-b border-white/10 text-coral">About Us</a>
       <a href="specialities.html" class="py-3 border-b border-white/10 hover:text-coral transition-colors">Specialities</a>
       <a href="services.html" class="py-3 border-b border-white/10 hover:text-coral transition-colors">Services</a>
@@ -149,18 +151,18 @@
 </header>
 
 <!-- ============ PAGE HERO ============ -->
-<section class="relative bg-navy overflow-hidden clip-diagonal pt-16 pb-28 lg:pt-20 lg:pb-36">
+<section class="relative bg-navy overflow-hidden clip-diagonal h-[520px] lg:h-[560px] flex items-center pt-16">
   <div class="absolute inset-0">
-    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1600&auto=format&fit=crop" alt="" class="w-full h-full object-cover opacity-25">
-    <div class="absolute inset-0 bg-gradient-to-r from-navydeep via-navy/95 to-navy/60"></div>
+    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1600&auto=format&fit=crop" alt="Office space" class="w-full h-full object-cover opacity-60">
+    <div class="absolute inset-0 bg-gradient-to-r from-navydeep/90 via-navy/70 to-transparent"></div>
   </div>
-  <div class="relative max-w-7xl mx-auto px-5 lg:px-8">
+  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 w-full">
     <p class="eyebrow text-coral mb-4 reveal in">About Us</p>
-    <h1 class="font-display text-white text-4xl sm:text-5xl lg:text-[3.2rem] leading-[1.1] font-semibold tracking-tight max-w-2xl reveal in">
+    <h1 class="font-display text-white text-4xl sm:text-5xl lg:text-[3.2rem] leading-[1.1] font-semibold tracking-tight max-w-3xl reveal in">
       Charting a journey of accurate, faster medical billing
     </h1>
-    <p class="mt-6 text-white/60 max-w-lg reveal in">From a two-person billing desk to a full revenue-cycle partner for hundreds of practices — here's how we got here.</p>
-    <div class="mt-8 flex items-center gap-2 text-sm text-white/50 reveal in">
+    <p class="mt-6 text-white/80 max-w-lg reveal in">From a two-person billing desk to a full revenue-cycle partner for hundreds of practices — here's how we got here.</p>
+    <div class="mt-8 flex items-center gap-2 text-sm text-white/70 reveal in">
       <a href="index.html" class="hover:text-coral transition-colors">Home</a>
       <i data-lucide="chevron-right" class="w-4 h-4"></i>
       <span class="text-white">About Us</span>
@@ -362,71 +364,95 @@
   </div>
 </section>
 
-<!-- ============ FOOTER (as provided) ============ -->
+<!-- ============ FOOTER ============ -->
 <footer class="bg-navydeep pt-20 pb-8">
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
       <div class="lg:col-span-2">
-        <a href="index.html" class="flex items-center gap-2">
-          <span class="w-9 h-9 rounded-lg bg-coral flex items-center justify-center">
-            <i data-lucide="activity" class="w-5 h-5 text-white"></i>
-          </span>
-          <span class="font-display text-xl font-semibold text-white">Vantage <span class="text-coral">RCM</span></span>
-        </a>
+        <a href="#top" class="flex items-center gap-3 shrink-0 focus-ring">
+  <!-- Bright Logo SVG Icon -->
+  <div class="w-10 h-10 flex items-center justify-center shrink-0">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+      <!-- M Shape Ribbon Gradient -->
+      <path d="M10 75V35C10 30 15 25 20 25H35L50 50L65 25H80C85 25 90 30 90 35V75" stroke="url(#brightGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Stethoscope Wire & Head -->
+      <path d="M30 25V55C30 70 45 75 55 60" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="55" cy="65" r="7" fill="#00E5FF" stroke="#FFFFFF" stroke-width="3"/>
+      <circle cx="28" cy="22" r="4" fill="#FFFFFF"/>
+      <circle cx="72" cy="22" r="4" fill="#FFFFFF"/>
+      <defs>
+        <linearGradient id="brightGrad" x1="10" y1="25" x2="90" y2="75" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#00E5FF"/>
+          <stop offset="1" stop-color="#38BDF8"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Logo Text & Tagline -->
+  <div class="flex flex-col">
+    <div class="text-2xl font-extrabold text-white tracking-wider leading-none">
+      MEDI<span class="text-[#FF6B4A]">Q</span>
+    </div>
+    <div class="text-[9px] font-bold text-[#F7F5F1] tracking-[0.2em] mt-1">
+      MEDICAL BILLING
+    </div>
+  </div>
+</a>
         <p class="mt-5 text-white/50 text-sm leading-relaxed max-w-xs">Billing, credentialing, virtual staffing, and digital growth for independent healthcare practices.</p>
-        <div class="flex items-center gap-3 mt-6">
+       <div class="flex items-center gap-3">
+  
+  <!-- Facebook -->
+  <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="Facebook">
+    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+  </a>
 
-          <!-- Facebook -->
-          <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="Facebook">
-            <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-            </svg>
-          </a>
+  <!-- LinkedIn -->
+  <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="LinkedIn">
+    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+    </svg>
+  </a>
 
-          <!-- LinkedIn -->
-          <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="LinkedIn">
-            <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
-          </a>
+  <!-- Twitter / X -->
+  <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="Twitter">
+    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+  </a>
 
-          <!-- Twitter / X -->
-          <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="Twitter">
-            <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-          </a>
+  <!-- Instagram -->
+  <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="Instagram">
+    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+  </a>
 
-          <!-- Instagram -->
-          <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--coral,#FF6B4A)] transition-colors" aria-label="Instagram">
-            <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-          </a>
-
-        </div>
+</div>
       </div>
 
       <div>
         <p class="text-white font-semibold text-sm mb-5">Services</p>
         <ul class="space-y-3 text-sm text-white/50">
-          <li><a href="index.html#services" class="hover:text-coral transition-colors">Billing &amp; Coding</a></li>
-          <li><a href="index.html#services" class="hover:text-coral transition-colors">Credentialing</a></li>
-          <li><a href="index.html#services" class="hover:text-coral transition-colors">Virtual Assistant</a></li>
-          <li><a href="index.html#services" class="hover:text-coral transition-colors">Virtual Medical Scribe</a></li>
-          <li><a href="index.html#services" class="hover:text-coral transition-colors">Website Development</a></li>
-          <li><a href="index.html#services" class="hover:text-coral transition-colors">SEO Marketing</a></li>
+          <li><a href="#services" class="hover:text-coral transition-colors">Billing &amp; Coding</a></li>
+          <li><a href="#services" class="hover:text-coral transition-colors">Credentialing</a></li>
+          <li><a href="#services" class="hover:text-coral transition-colors">Virtual Assistant</a></li>
+          <li><a href="#services" class="hover:text-coral transition-colors">Virtual Medical Scribe</a></li>
+          <li><a href="#services" class="hover:text-coral transition-colors">Website Development</a></li>
+          <li><a href="#services" class="hover:text-coral transition-colors">SEO Marketing</a></li>
         </ul>
       </div>
 
       <div>
         <p class="text-white font-semibold text-sm mb-5">Company</p>
         <ul class="space-y-3 text-sm text-white/50">
-          <li><a href="index.html#why" class="hover:text-coral transition-colors">Why Us</a></li>
-          <li><a href="index.html#process" class="hover:text-coral transition-colors">Our Process</a></li>
-          <li><a href="index.html#insights" class="hover:text-coral transition-colors">Insights</a></li>
-          <li><a href="index.html#faq" class="hover:text-coral transition-colors">FAQ</a></li>
-          <li><a href="index.html#contact" class="hover:text-coral transition-colors">Contact</a></li>
+          <li><a href="#why" class="hover:text-coral transition-colors">Why Us</a></li>
+          <li><a href="#process" class="hover:text-coral transition-colors">Our Process</a></li>
+          <li><a href="#insights" class="hover:text-coral transition-colors">Insights</a></li>
+          <li><a href="#faq" class="hover:text-coral transition-colors">FAQ</a></li>
+          <li><a href="#contact" class="hover:text-coral transition-colors">Contact</a></li>
         </ul>
       </div>
 
